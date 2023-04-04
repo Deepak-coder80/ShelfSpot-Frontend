@@ -8,7 +8,7 @@ class APIAuthentication {
   static Future<String> adminLogin(String username, String password) async {
     url += 'token/';
     var response = await http.post(
-      Uri.parse('https://shelf-spot-api2.onrender.com/token/'),
+      Uri.parse(url),
       body: {
         'username': username,
         'password': password,
@@ -27,12 +27,11 @@ class APIAuthentication {
     }
 
     if (response.statusCode == 200) {
-      return  response.body.toString();
-    }else if(response.statusCode==404) {
+      return response.body.toString();
+    } else if (response.statusCode == 404) {
       return 'Not Found';
-    }else {
+    } else {
       return 'Something Wrong Happened';
     }
-
   }
 }

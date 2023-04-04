@@ -1,13 +1,14 @@
-import 'dart:developer';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelfspot/apiServices/authentication.dart';
+import 'package:shelfspot/components/alertbox.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
+import 'package:shelfspot/screens/usersPages/admin_home.dart';
 
 class AdminLoginPage extends StatefulWidget {
   const AdminLoginPage({Key? key}) : super(key: key);
@@ -77,11 +78,11 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                     showDialog(
                       context: context,
                       builder: (context) => const AlertBox(
-                        title: 'Email Can\'t be Empty' ,
+                        title: 'Email Can\'t be Empty',
                         content: 'Please Enter a email',
                       ),
                     );
-                  }else if(!EmailValidator.validate(_emailController.text)){
+                  } else if (!EmailValidator.validate(_emailController.text)) {
                     // ignore: use_build_context_synchronously
                     showDialog(
                       context: context,
@@ -123,12 +124,16 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                         ),
                       );
                     } else {
-                      Map<String,dynamic> decodeToken = JwtDecoder.decode(result);
-                      log(decodeToken.keys.toString());
-                      SharedPreferences pref = await SharedPreferences.getInstance();
+                      Map<String, dynamic> decodeToken =
+                          JwtDecoder.decode(result);
+                      SharedPreferences pref =
+                          await SharedPreferences.getInstance();
                       pref.setString("email", decodeToken['email']);
                       pref.setString("collage", decodeToken['collage']);
                       pref.setBool("isAdmin", true);
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => const AdminHomePage()));
                     }
                   }
                 },
@@ -145,39 +150,3 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
   }
 }
 
-class AlertBox extends StatelessWidget {
-  final String title;
-  final String content;
-
-  const AlertBox({
-    super.key,
-    required this.title,
-    required this.content,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: const Color(0xFF201F15),
-      title: Text(
-        title,
-        style: const TextStyle(color: Colors.white),
-      ),
-      content: Text(
-        content,
-        style: const TextStyle(color: Colors.white),
-      ),
-      actions: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          child: const Text(
-            'OK',
-            style: TextStyle(color: Color(0xFFFFC700)),
-          ),
-        )
-      ],
-    );
-  }
-}
