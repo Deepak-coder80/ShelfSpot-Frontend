@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shelfspot/components/login_button.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class _LogInPageState extends State<LogInPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF201F15),
+      backgroundColor: const Color(0xFF201F15),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -29,50 +30,47 @@ class _LogInPageState extends State<LogInPage> {
             const SizedBox(
               height: 52,
             ),
-            LoginButton(text: 'Login As Admin',),
+            const LoginButton(
+              text: 'Login As Admin',
+            ),
             const SizedBox(
               height: 52,
             ),
-            LoginButton(text: 'Login As Student',),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class LoginButton extends StatelessWidget {
-  String text;
-   LoginButton({
-    super.key,
-     required this.text
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        width: double.infinity,
-        height: 50,
-        child: ElevatedButton(
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Color(0xFFFFC700),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20)
-            )
-          ),
-          onPressed: () {},
-          child:  Center(
-            child:  Text(
-              text,
-              style: const TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 24,
-              ),
+            const LoginButton(
+              text: 'Login As Student',
             ),
-          ),
+            const SizedBox(
+              height: 52,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'New to here?',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+                const SizedBox(
+                  width: 3,
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: const Text(
+                    'Sign Up',
+                    style: TextStyle(
+                      color:  Color(0xFFFFC700),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+              ],
+            )
+          ],
         ),
       ),
     );
