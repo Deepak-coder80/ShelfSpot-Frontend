@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shelfspot/components/login_button.dart';
+import 'package:shelfspot/components/signup_text_button.dart';
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -42,37 +43,11 @@ class _LogInPageState extends State<LogInPage> {
             const SizedBox(
               height: 52,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  'New to here?',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(
-                  width: 3,
-                ),
-                TextButton(
-                  onPressed: () {},
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      color:  Color(0xFFFFC700),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  ),
-                ),
-              ],
-            )
+            const SignUpTButton()
           ],
         ),
       ),
     );
   }
 }
+
