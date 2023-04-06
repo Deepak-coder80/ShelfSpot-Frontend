@@ -2,7 +2,7 @@
     package="com.example.shelfspot">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
-        android:label="shelfspot"
+        android:label="Shelf Spot"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
