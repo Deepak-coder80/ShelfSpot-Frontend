@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
+import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelfspot/apiServices/authentication.dart';
 import 'package:shelfspot/components/alertbox.dart';
@@ -35,6 +36,20 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
+  }
+
+  Future<String> fetchData() async {
+    try {
+      String result = await APIAuthentication.adminLogin(
+          _emailController.text, _passwordController.text);
+      if (result != 'Not Found') {
+        return result;
+      } else {
+        throw Exception('User is Not Found');
+      }
+    } catch (e) {
+      rethrow;
+    }
   }
 
   @override
@@ -101,40 +116,54 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                       ),
                     );
                   } else {
-                    String result = await APIAuthentication.adminLogin(
-                      _emailController.text,
-                      _passwordController.text,
+                    showDialog(
+                      context: context,
+                      barrierDismissible: false,
+                      builder: (BuildContext context) {
+                        return const Center(
+                          child: SizedBox(
+                            height: 90,
+                            width: 90,
+                            child: LoadingIndicator(
+                              indicatorType: Indicator.ballRotateChase,
+                                colors:  [Color(0xFFFFC700)],       /// Optional, The color collections
+                                strokeWidth: 2,                     /// Optional, The stroke of the line, only applicable to widget which contains line
+                                pathBackgroundColor: Colors.black,
+                            ),
+                          ),
+                        );
+                      },
                     );
-                    if (result == 'Not Found') {
-                      // ignore: use_build_context_synchronously
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AlertBox(
-                          title: 'User Not Found',
-                          content: 'Please check your credentials once again',
-                        ),
-                      );
-                    } else if (result == 'Something Wrong Happened') {
-                      // ignore: use_build_context_synchronously
-                      showDialog(
-                        context: context,
-                        builder: (context) => const AlertBox(
-                          title: 'Something went wrong',
-                          content: 'Please check your credentials once again',
-                        ),
-                      );
-                    } else {
+
+                    fetchData().then((data) async {
+                      Navigator.of(context).pop();
                       Map<String, dynamic> decodeToken =
-                          JwtDecoder.decode(result);
+                          JwtDecoder.decode(data);
                       SharedPreferences pref =
                           await SharedPreferences.getInstance();
                       pref.setString("email", decodeToken['email']);
                       pref.setString("collage", decodeToken['collage']);
                       pref.setBool("isAdmin", true);
+                      _emailController.clear();
+                      _passwordController.clear();
                       // ignore: use_build_context_synchronously
-                      Navigator.of(context).pushReplacement(MaterialPageRoute(
-                          builder: (context) => const AdminHomePage()));
-                    }
+                      Navigator.of(context).pushAndRemoveUntil(
+                        MaterialPageRoute(
+                            builder: (context) => const AdminHomePage()),
+                        (route) => false,
+                      );
+                    }).catchError((error) {
+                      _passwordController.clear();
+                      Navigator.of(context).pop();
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AlertBox(
+                          title: 'User Not Found',
+                          content: 'Please check your credentials once again. ',
+                        ),
+                      );
+                    });
                   }
                 },
               ),
@@ -149,4 +178,3 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     );
   }
 }
-
