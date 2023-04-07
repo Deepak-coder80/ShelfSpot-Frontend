@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelfspot/apiServices/authentication.dart';
+import 'package:shelfspot/apiServices/admin_authentication_service.dart';
 import 'package:shelfspot/components/alertboxes/alertbox.dart';
 import 'package:shelfspot/components/alertboxes/signup_alert_box.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';

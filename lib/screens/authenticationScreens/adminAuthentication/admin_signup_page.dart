@@ -4,7 +4,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:loading_indicator/loading_indicator.dart';
-import 'package:shelfspot/apiServices/authentication.dart';
+import 'package:shelfspot/apiServices/admin_authentication_service.dart';
 import 'package:shelfspot/components/alertboxes/alertbox.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
