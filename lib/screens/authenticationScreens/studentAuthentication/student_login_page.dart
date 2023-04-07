@@ -11,16 +11,16 @@ import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
-import 'package:shelfspot/screens/usersPages/admin_home.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_home.dart';
 
-class AdminLoginPage extends StatefulWidget {
-  const AdminLoginPage({Key? key}) : super(key: key);
+class StudentLoginPage extends StatefulWidget {
+  const StudentLoginPage({Key? key}) : super(key: key);
 
   @override
-  State<AdminLoginPage> createState() => _AdminLoginPageState();
+  State<StudentLoginPage> createState() => _StudentLoginPageState();
 }
 
-class _AdminLoginPageState extends State<AdminLoginPage> {
+class _StudentLoginPageState extends State<StudentLoginPage> {
   // Controllers
   late TextEditingController _emailController;
 
@@ -59,6 +59,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF201F15),
       appBar: AppBar(
+        title:  const Text('Shelf Spot Student'),
         backgroundColor: const Color(0xFF201F15),
         elevation: 0,
       ),

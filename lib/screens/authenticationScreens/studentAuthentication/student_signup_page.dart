@@ -69,6 +69,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF201F15),
       appBar: AppBar(
+        title:  const Text('Shelf Spot Student'),
         backgroundColor: const Color(0xFF201F15),
         elevation: 0,
       ),
@@ -268,13 +269,13 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
             items: collageList
                 .map(
                   (String value) => DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  ),
-                )
+                value: value,
+                child: Text(
+                  value,
+                  style: const TextStyle(color: Colors.black),
+                ),
+              ),
+            )
                 .toList(),
             onChanged: (String? value) {
               setState(() {

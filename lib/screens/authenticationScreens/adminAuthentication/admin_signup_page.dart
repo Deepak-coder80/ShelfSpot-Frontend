@@ -65,6 +65,7 @@ class _AdminSignUpPageState extends State<AdminSignUpPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF201F15),
       appBar: AppBar(
+        title: const Text('Shelf Spot Admin'),
         backgroundColor: const Color(0xFF201F15),
         elevation: 0,
       ),

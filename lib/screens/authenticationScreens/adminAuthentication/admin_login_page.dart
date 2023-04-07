@@ -10,7 +10,7 @@ import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
-import 'package:shelfspot/screens/usersPages/admin_home.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_home.dart';
 
 class AdminLoginPage extends StatefulWidget {
   const AdminLoginPage({Key? key}) : super(key: key);
@@ -59,6 +59,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       backgroundColor: const Color(0xFF201F15),
       appBar: AppBar(
         backgroundColor: const Color(0xFF201F15),
+        title: const Text('Shelf Spot Admin'),
         elevation: 0,
       ),
       body: Center(

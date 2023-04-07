@@ -4,6 +4,8 @@ import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_login_page.dart';
 
+import 'studentAuthentication/student_login_page.dart';
+
 
 class LogInPage extends StatefulWidget {
   const LogInPage({Key? key}) : super(key: key);
@@ -62,7 +64,7 @@ class _LogInPageState extends State<LogInPage> {
                   text: 'Login As Student',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const AdminLoginPage()));
+                        builder: (context) => const StudentLoginPage()));
                   },
                 ),
               ),
