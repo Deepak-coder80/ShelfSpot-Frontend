@@ -21,6 +21,9 @@ class _LogInPageState extends State<LogInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              const SizedBox(
+                height: 50,
+              ),
               Image.asset('assets/images/applogo.png'),
               const Text(
                 'Shelf Spot',
@@ -33,20 +36,28 @@ class _LogInPageState extends State<LogInPage> {
               const SizedBox(
                 height: 52,
               ),
-              LoginButton(
-                text: 'Login As Admin',
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AdminLoginPage()));
-                },
+              SizedBox(
+                height: 80,
+                width: 300,
+                child: LoginButton(
+                  text: 'Login As Admin',
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AdminLoginPage()));
+                  },
+                ),
               ),
               const SizedBox(
                 height: 52,
               ),
-              LoginButton(
-                text: 'Login As Student',
-                onPressed: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AdminLoginPage()));
-                },
+              SizedBox(
+                height: 80,
+                width: 300,
+                child: LoginButton(
+                  text: 'Login As Student',
+                  onPressed: (){
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> const AdminLoginPage()));
+                  },
+                ),
               ),
               const SizedBox(
                 height: 52,

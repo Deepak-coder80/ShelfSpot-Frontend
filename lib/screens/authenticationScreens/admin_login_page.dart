@@ -70,102 +70,112 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               const SizedBox(
                 height: 52,
               ),
-              TextInputField(
-                text: ' Email Address',
-                controller: _emailController,
-                iconData: Icons.email_outlined,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextInputField(
+                  text: ' Email Address',
+                  controller: _emailController,
+                  iconData: Icons.email_outlined,
+                ),
               ),
               const SizedBox(
                 height: 42,
               ),
-              PasswordTextField(
-                text: 'Enter password',
-                controller: _passwordController,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: PasswordTextField(
+                  text: 'Enter password',
+                  controller: _passwordController,
+                ),
               ),
               const SizedBox(
                 height: 42,
               ),
-              LoginButton(
-                text: 'Log In',
-                onPressed: () async {
-                  if (_emailController.text.isEmpty) {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (context) => const AlertBox(
-                        title: 'Email Can\'t be Empty',
-                        content: 'Please Enter a email',
-                      ),
-                    );
-                  } else if (!EmailValidator.validate(_emailController.text)) {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (context) => const AlertBox(
-                        title: 'Please enter a valid email',
-                        content: 'Email should be an existing one',
-                      ),
-                    );
-                  } else if (_passwordController.text.length < 6) {
-                    // ignore: use_build_context_synchronously
-                    showDialog(
-                      context: context,
-                      builder: (context) => const AlertBox(
-                        title: 'Please enter a valid password',
-                        content: 'Password Should be 6 characters',
-                      ),
-                    );
-                  } else {
-                    showDialog(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return const Center(
-                          child: SizedBox(
-                            height: 90,
-                            width: 90,
-                            child: LoadingIndicator(
-                              indicatorType: Indicator.ballRotateChase,
-                                colors:  [Color(0xFFFFC700)],       /// Optional, The color collections
-                                strokeWidth: 2,                     /// Optional, The stroke of the line, only applicable to widget which contains line
-                                pathBackgroundColor: Colors.black,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-
-                    fetchData().then((data) async {
-                      Navigator.of(context).pop();
-                      Map<String, dynamic> decodeToken =
-                          JwtDecoder.decode(data);
-                      SharedPreferences pref =
-                          await SharedPreferences.getInstance();
-                      pref.setString("email", decodeToken['email']);
-                      pref.setString("collage", decodeToken['collage']);
-                      pref.setBool("isAdmin", true);
-                      _emailController.clear();
-                      _passwordController.clear();
-                      // ignore: use_build_context_synchronously
-                      Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(
-                            builder: (context) => const AdminHomePage()),
-                        (route) => false,
-                      );
-                    }).catchError((error) {
-                      _passwordController.clear();
-                      Navigator.of(context).pop();
+              SizedBox(
+                height: 80,
+                width: 300,
+                child: LoginButton(
+                  text: 'Log In',
+                  onPressed: () async {
+                    if (_emailController.text.isEmpty) {
                       // ignore: use_build_context_synchronously
                       showDialog(
                         context: context,
                         builder: (context) => const AlertBox(
-                          title: 'User Not Found',
-                          content: 'Please check your credentials once again. ',
+                          title: 'Email Can\'t be Empty',
+                          content: 'Please Enter a email',
                         ),
                       );
-                    });
-                  }
-                },
+                    } else if (!EmailValidator.validate(_emailController.text)) {
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AlertBox(
+                          title: 'Please enter a valid email',
+                          content: 'Email should be an existing one',
+                        ),
+                      );
+                    } else if (_passwordController.text.length < 6) {
+                      // ignore: use_build_context_synchronously
+                      showDialog(
+                        context: context,
+                        builder: (context) => const AlertBox(
+                          title: 'Please enter a valid password',
+                          content: 'Password Should be 6 characters',
+                        ),
+                      );
+                    } else {
+                      showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return const Center(
+                            child: SizedBox(
+                              height: 90,
+                              width: 90,
+                              child: LoadingIndicator(
+                                indicatorType: Indicator.ballRotateChase,
+                                  colors:  [Color(0xFFFFC700)],       /// Optional, The color collections
+                                  strokeWidth: 2,                     /// Optional, The stroke of the line, only applicable to widget which contains line
+                                  pathBackgroundColor: Colors.black,
+                              ),
+                            ),
+                          );
+                        },
+                      );
+
+                      fetchData().then((data) async {
+                        Navigator.of(context).pop();
+                        Map<String, dynamic> decodeToken =
+                            JwtDecoder.decode(data);
+                        SharedPreferences pref =
+                            await SharedPreferences.getInstance();
+                        pref.setString("email", decodeToken['email']);
+                        pref.setString("collage", decodeToken['collage']);
+                        pref.setBool("isAdmin", true);
+                        _emailController.clear();
+                        _passwordController.clear();
+                        // ignore: use_build_context_synchronously
+                        Navigator.of(context).pushAndRemoveUntil(
+                          MaterialPageRoute(
+                              builder: (context) => const AdminHomePage()),
+                          (route) => false,
+                        );
+                      }).catchError((error) {
+                        _passwordController.clear();
+                        Navigator.of(context).pop();
+                        // ignore: use_build_context_synchronously
+                        showDialog(
+                          context: context,
+                          builder: (context) => const AlertBox(
+                            title: 'User Not Found',
+                            content: 'Please check your credentials once again. ',
+                          ),
+                        );
+                      });
+                    }
+                  },
+                ),
               ),
               const SizedBox(
                 height: 20,
