@@ -15,6 +15,7 @@ class SignUpAlertBox extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () {
+            Navigator.pop(context);
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const AdminSignUpPage()));
           },
@@ -28,6 +29,7 @@ class SignUpAlertBox extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
+            Navigator.pop(context);
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => const AdminSignUpPage()));
           },
