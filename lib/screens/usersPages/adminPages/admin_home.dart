@@ -12,7 +12,7 @@ class AdminHomePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: const Color(0xFF201F15),
         elevation: 0,
-        title: const Text('Shelf Spot'),
+        title: const Text('Shelf Spot Admin'),
       ),
       body: Center(
         child: ElevatedButton(
