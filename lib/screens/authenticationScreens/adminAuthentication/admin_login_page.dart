@@ -4,7 +4,8 @@ import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelfspot/apiServices/authentication.dart';
-import 'package:shelfspot/components/alertbox.dart';
+import 'package:shelfspot/components/alertboxes/alertbox.dart';
+import 'package:shelfspot/components/alertboxes/signup_alert_box.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
@@ -63,7 +64,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+            //mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Image.asset('assets/images/applogo.png'),
@@ -78,9 +79,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
                   iconData: Icons.email_outlined,
                 ),
               ),
-              const SizedBox(
-                height: 42,
-              ),
+
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordTextField(
@@ -93,7 +92,7 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               ),
               SizedBox(
                 height: 80,
-                width: 300,
+                width: 200,
                 child: LoginButton(
                   text: 'Log In',
                   onPressed: () async {
@@ -180,7 +179,14 @@ class _AdminLoginPageState extends State<AdminLoginPage> {
               const SizedBox(
                 height: 20,
               ),
-              const SignUpTButton(),
+              SignUpTButton(
+                text1: 'New to here?',
+                text2: 'Sign Up',
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const SignUpAlertBox()));
+                },
+              ),
             ],
           ),
         ),
