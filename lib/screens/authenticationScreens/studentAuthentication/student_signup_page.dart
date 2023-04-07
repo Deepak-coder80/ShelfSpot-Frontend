@@ -7,6 +7,7 @@ import 'package:shelfspot/apiServices/other_service.dart';
 import 'package:shelfspot/apiServices/student_authentication_service.dart';
 import 'package:shelfspot/components/alertboxes/alertbox.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
+import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
 import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_signup_page.dart';
@@ -201,6 +202,14 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                           }
                         },
                       ),
+                    ),
+                    SignUpTButton(
+                      text1: 'Already Sign up?',
+                      text2: 'Login Here',
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) => const LogInPage()));
+                      },
                     ),
                   ],
                 );

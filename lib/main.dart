@@ -4,6 +4,8 @@ import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shelfspot/screens/usersPages/admin_home.dart';
 
+import 'screens/usersPages/student_home.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SharedPreferences pref = await SharedPreferences.getInstance();
@@ -32,7 +34,7 @@ class MaterialHomePage extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: email != null
-          ? (isAdmin == true ? const AdminHomePage() : const LogInPage())
+          ? (isAdmin == true ? const AdminHomePage() : const StudentHomePage())
           : const LogInPage(),
     );
   }
