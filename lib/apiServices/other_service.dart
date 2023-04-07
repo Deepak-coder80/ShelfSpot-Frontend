@@ -16,10 +16,8 @@ class OtherAPIServices{
       var redirectUrl = response.headers['location'];
       response =await http.get(Uri.parse(redirectUrl!));
     }
-    log(response.statusCode.toString());
 
     if(response.statusCode==200){
-      log('Successful ${response.body}');
       List<String> collages = (json.decode(response.body) as List)
         .map((e) => e.toString())
         .toList();

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_signup_page.dart';
+import 'package:shelfspot/screens/authenticationScreens/studentAuthentication/student_signup_page.dart';
 
 class SignUpAlertBox extends StatelessWidget {
   const SignUpAlertBox({Key? key}) : super(key: key);
@@ -31,7 +32,7 @@ class SignUpAlertBox extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
             Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => const AdminSignUpPage()));
+                builder: (context) => const StudentSignUpPage()));
           },
           child: const Text(
             'SignUp as Student',

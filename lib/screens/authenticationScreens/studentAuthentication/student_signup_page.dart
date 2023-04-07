@@ -4,10 +4,13 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shelfspot/apiServices/other_service.dart';
+import 'package:shelfspot/apiServices/student_authentication_service.dart';
 import 'package:shelfspot/components/alertboxes/alertbox.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
+import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_signup_page.dart';
+import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
 
 class StudentSignUpPage extends StatefulWidget {
   const StudentSignUpPage({Key? key}) : super(key: key);
@@ -43,6 +46,23 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
     super.dispose();
   }
 
+  Future<bool> fetchData(String collage) async {
+    try {
+      bool result = await StudentAPIAuthentication.signUpAdmin(
+        _emailController.text,
+        collage,
+        _passwordController.text,
+      );
+      if (result == true) {
+        return result;
+      } else {
+        throw Exception("Sign Up unsuccessful");
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +77,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
             future: collageList,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
-
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -99,7 +118,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                       width: 200,
                       child: LoginButton(
                         text: 'Sign Up',
-                        onPressed: ()  {
+                        onPressed: () {
                           if (_emailController.text.isEmpty) {
                             // ignore: use_build_context_synchronously
                             showDialog(
@@ -134,8 +153,50 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                               context: context,
                               builder: (context) => const AlertBox(
                                 title: 'Password should match',
-                                content: 'Password and confirm password should match',
+                                content:
+                                    'Password and confirm password should match',
                               ),
+                            );
+                          } else {
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (BuildContext context) {
+                                return const Center(
+                                  child: LoadingIcon(),
+                                );
+                              },
+                            );
+                            fetchData(dropDownValue!).then(
+                              (data) {
+                                Navigator.pop(context);
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LogInPage()),
+                                    (route) => false);
+                                const snackBar = SnackBar(
+                                  backgroundColor: Colors.green,
+                                  content: Text(
+                                      'Signed Up Successfully. Please Login'),
+                                );
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(snackBar);
+                              },
+                            ).catchError(
+                              (e) {
+                                Navigator.of(context).pop();
+                                // ignore: use_build_context_synchronously
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => const AlertBox(
+                                    title: 'Sign Up unsuccessful',
+                                    content:
+                                        'Please check your credentials once again and Try again',
+                                  ),
+                                );
+                              },
                             );
                           }
                         },

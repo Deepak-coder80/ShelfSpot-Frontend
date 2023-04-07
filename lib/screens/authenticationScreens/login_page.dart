@@ -3,7 +3,6 @@ import 'package:shelfspot/components/alertboxes/signup_alert_box.dart';
 import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_login_page.dart';
-import 'package:shelfspot/screens/authenticationScreens/studentAuthentication/student_signup_page.dart';
 
 
 class LogInPage extends StatefulWidget {
@@ -63,7 +62,7 @@ class _LogInPageState extends State<LogInPage> {
                   text: 'Login As Student',
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const StudentSignUpPage()));
+                        builder: (context) => const AdminLoginPage()));
                   },
                 ),
               ),
