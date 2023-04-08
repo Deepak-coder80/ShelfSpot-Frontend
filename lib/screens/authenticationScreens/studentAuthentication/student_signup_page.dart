@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -235,7 +233,10 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
   Widget buildCollageDropDown(AsyncSnapshot<List<String>> snapshot) {
     List<String> collageList = snapshot.data!;
     collageList = collageList.toSet().toList(); // Remove duplicates
+    collageList.sort();
+    collageList = collageList.map((e)=>e.toUpperCase()).toList();
     dropDownValue ??= collageList.first;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(

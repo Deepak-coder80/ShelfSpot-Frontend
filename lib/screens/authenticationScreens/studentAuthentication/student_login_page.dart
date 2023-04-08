@@ -12,6 +12,7 @@ import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_home.dart';
+import 'package:shelfspot/screens/usersPages/studentPages/student_home.dart';
 
 class StudentLoginPage extends StatefulWidget {
   const StudentLoginPage({Key? key}) : super(key: key);
@@ -159,7 +160,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                         // ignore: use_build_context_synchronously
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
-                              builder: (context) => const AdminHomePage()),
+                              builder: (context) => const StudentHomePage()),
                               (route) => false,
                         );
                       }).catchError((error) {
