@@ -271,7 +271,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   (String value) => DropdownMenuItem<String>(
                 value: value,
                 child: Text(
-                  value,
+                  value.toUpperCase(),
                   style: const TextStyle(color: Colors.black),
                 ),
               ),
