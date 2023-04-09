@@ -51,4 +51,48 @@ class QnPaperAPIServices {
 
     return null;
   }
+
+  static Future<List<QnPaperModel>?> getQuestionPaperByName(
+      String name) async {
+    String url = '$baseurl/qPaperSub/';
+
+    var body = jsonEncode({"name": name, "collage": "SoE"});
+
+    var response = await http.post(
+      Uri.parse(url),
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: body,
+    );
+
+    if (response.statusCode == 307) {
+      var redirectUrl = response.headers['location'];
+      response = await http.post(
+        Uri.parse(redirectUrl!),
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: body,
+      );
+    }
+
+    if (response.statusCode == 200) {
+      List<QnPaperModel> qnPapers = (json.decode(response.body) as List)
+          .map((e) => QnPaperModel(
+        name: e['qnSubName'],
+        semester: e['qnSemester'],
+        month: e['qnMonth'],
+        year: e['qnYear'],
+        link: e['qnLink'],
+        scheme: e['qnScheme'],
+      )).toList();
+
+      return qnPapers;
+    }
+
+    return null;
+  }
 }

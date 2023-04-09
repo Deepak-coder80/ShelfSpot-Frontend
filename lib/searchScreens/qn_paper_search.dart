@@ -70,7 +70,7 @@ class _QnPaperSearchScreenState extends State<QnPaperSearchScreen> {
           LoginButton(
             text: 'Search',
             onPressed: () {
-              QnPaperAPIServices.getQuestionPaperBySemester("0");
+              QnPaperAPIServices.getQuestionPaperByName("Microprocessors");
             },
           ),
         ],
