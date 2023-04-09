@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shelfspot/screens/usersPages/studentPages/student_book_page.dart';
+import 'package:shelfspot/screens/usersPages/studentPages/student_profile_page.dart';
+import 'package:shelfspot/searchScreens/qn_paper_search.dart';
 
 class StudentHomePage extends StatefulWidget {
   const StudentHomePage({Key? key}) : super(key: key);
@@ -13,7 +14,15 @@ class StudentHomePage extends StatefulWidget {
 class _StudentHomePageState extends State<StudentHomePage> {
   int _currentIndex = 0;
 
+  final List _pages = const [
+    StudentBookPage(),
+    QnPaperSearchScreen(),
+    StudentProfileScreen(),
+  ];
   void onTapBNB(index) {
+    if(index >= _pages.length){
+      return;
+    }
     setState(() {
       _currentIndex = index;
     });
@@ -28,21 +37,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
         elevation: 0,
         title: const Text('Shelf Spot Student'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            SharedPreferences pref = await SharedPreferences.getInstance();
-
-            pref.remove("email");
-            pref.remove("collage");
-            pref.remove("isAdmin");
-            // ignore: use_build_context_synchronously
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const LogInPage()));
-          },
-          child: const Text('Log out'),
-        ),
-      ),
+      body: _pages[_currentIndex],
       bottomNavigationBar: buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},

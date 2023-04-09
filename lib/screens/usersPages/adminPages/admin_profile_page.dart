@@ -1,0 +1,87 @@
+import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shelfspot/components/buttonComponents/login_button.dart';
+import 'package:shelfspot/components/otherComponents/profile_details_display_component.dart';
+import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
+
+class AdminProfileScreen extends StatefulWidget {
+  const AdminProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<AdminProfileScreen> createState() => _AdminProfileScreenState();
+}
+
+class _AdminProfileScreenState extends State<AdminProfileScreen> {
+  String email='';
+  String collage='';
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  void getData() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    setState(() {
+      email = pref.getString('email') ?? '';
+      collage = pref.getString('collage') ?? '';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF201F15),
+      body: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const SizedBox(
+              height: 20,
+            ),
+            const CircleAvatar(
+              backgroundColor: Colors.white24,
+              radius: 60,
+              child: Icon(
+                FontAwesomeIcons.user,
+                color: Colors.white,
+                size: 36,
+              ),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            ProfileDetails(heading: 'Email : ', content: email),
+            const SizedBox(
+              height: 10,
+            ),
+            ProfileDetails(heading: 'Collage : ', content: collage),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 80,
+              width: 200,
+              child: LoginButton(
+                text: 'Log Out',
+                onPressed: () async {
+                  SharedPreferences pref =
+                  await SharedPreferences.getInstance();
+
+                  pref.remove("email");
+                  pref.remove("collage");
+                  pref.remove("isAdmin");
+                  // ignore: use_build_context_synchronously
+                  Navigator.of(context).pushReplacement(MaterialPageRoute(
+                      builder: (context) => const LogInPage()));
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

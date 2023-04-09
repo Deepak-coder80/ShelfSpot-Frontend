@@ -11,11 +11,11 @@ void main() async {
   var email = pref.getString('email');
   var isAdmin = pref.getBool('isAdmin');
   await dotenv.load(fileName: ".env");
-  runApp(MaterialHomePage(email: email, isAdmin: isAdmin));
+  runApp(MyApp(email: email, isAdmin: isAdmin));
 }
 
-class MaterialHomePage extends StatelessWidget {
-  const MaterialHomePage({
+class MyApp extends StatelessWidget {
+  const MyApp({
     super.key,
     required this.email,
     required this.isAdmin,

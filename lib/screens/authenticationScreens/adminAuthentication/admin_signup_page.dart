@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -168,7 +166,8 @@ class _AdminSignUpPageState extends State<AdminSignUpPage> {
                               (route) => false);
                           const snackBar = SnackBar(
                             backgroundColor: Colors.green,
-                            content: Text('Signed Up Successfully. Please Login'),
+                            content:
+                                Text('Signed Up Successfully. Please Login'),
                           );
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         },

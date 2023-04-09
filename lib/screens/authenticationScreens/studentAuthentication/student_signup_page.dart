@@ -234,7 +234,6 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
     List<String> collageList = snapshot.data!;
     collageList = collageList.toSet().toList(); // Remove duplicates
     collageList.sort();
-    collageList = collageList.map((e)=>e.toUpperCase()).toList();
     dropDownValue ??= collageList.first;
 
     return Padding(
@@ -272,7 +271,7 @@ class _StudentSignUpPageState extends State<StudentSignUpPage> {
                   (String value) => DropdownMenuItem<String>(
                 value: value,
                 child: Text(
-                  value,
+                  value.toUpperCase(),
                   style: const TextStyle(color: Colors.black),
                 ),
               ),
