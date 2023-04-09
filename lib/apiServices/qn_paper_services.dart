@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+
 import 'package:http/http.dart' as http;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:shelfspot/models/qn_paper_model.dart';
@@ -8,10 +9,10 @@ String baseurl = dotenv.get('END_URL');
 
 class QnPaperAPIServices {
   static Future<List<QnPaperModel>?> getQuestionPaperBySemester(
-      String semester) async {
+      String semester,String collage) async {
     String url = '$baseurl/qPaperSem/';
 
-    var body = jsonEncode({"semester": semester, "collage": "SoE"});
+    var body = jsonEncode({"semester": semester, "collage": collage});
 
     var response = await http.post(
       Uri.parse(url),
@@ -53,10 +54,10 @@ class QnPaperAPIServices {
   }
 
   static Future<List<QnPaperModel>?> getQuestionPaperByName(
-      String name) async {
+      String name,String collage) async {
     String url = '$baseurl/qPaperSub/';
 
-    var body = jsonEncode({"name": name, "collage": "SoE"});
+    var body = jsonEncode({"name": name, "collage": collage});
 
     var response = await http.post(
       Uri.parse(url),

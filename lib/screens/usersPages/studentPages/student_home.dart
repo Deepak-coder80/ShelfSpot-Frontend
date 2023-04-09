@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shelfspot/screens/usersPages/studentPages/student_book_page.dart';
 import 'package:shelfspot/screens/usersPages/studentPages/student_profile_page.dart';
-import 'package:shelfspot/screens/usersPages/studentPages/student_qn_paper_page.dart';
+import 'package:shelfspot/searchScreens/qn_paper_search.dart';
 
 class StudentHomePage extends StatefulWidget {
   const StudentHomePage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
 
   final List _pages = const [
     StudentBookPage(),
-    StudentQnPaperPage(),
+    QnPaperSearchScreen(),
     StudentProfileScreen(),
   ];
   void onTapBNB(index) {

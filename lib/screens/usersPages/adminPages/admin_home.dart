@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_book_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_profile_page.dart';
-import 'package:shelfspot/screens/usersPages/adminPages/admin_qn_paper_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_request_page.dart';
 import 'package:shelfspot/searchScreens/qn_paper_search.dart';
 

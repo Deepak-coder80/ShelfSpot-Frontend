@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:loading_indicator/loading_indicator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelfspot/apiServices/admin_authentication_service.dart';
 import 'package:shelfspot/apiServices/student_authentication_service.dart';
 import 'package:shelfspot/components/alertboxes/alertbox.dart';
 import 'package:shelfspot/components/alertboxes/signup_alert_box.dart';
@@ -11,7 +10,6 @@ import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/buttonComponents/signup_text_button.dart';
 import 'package:shelfspot/components/textFieldComponents/password_text_field.dart';
 import 'package:shelfspot/components/textFieldComponents/text_input_field.dart';
-import 'package:shelfspot/screens/usersPages/adminPages/admin_home.dart';
 import 'package:shelfspot/screens/usersPages/studentPages/student_home.dart';
 
 class StudentLoginPage extends StatefulWidget {
@@ -60,7 +58,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
     return Scaffold(
       backgroundColor: const Color(0xFF201F15),
       appBar: AppBar(
-        title:  const Text('Shelf Spot Student'),
+        title: const Text('Shelf Spot Student'),
         backgroundColor: const Color(0xFF201F15),
         elevation: 0,
       ),
@@ -82,7 +80,6 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                   iconData: Icons.email_outlined,
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: PasswordTextField(
@@ -108,7 +105,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                           content: 'Please Enter a email',
                         ),
                       );
-                    } else if (!EmailValidator.validate(_emailController.text)) {
+                    } else if (!EmailValidator.validate(
+                        _emailController.text)) {
                       // ignore: use_build_context_synchronously
                       showDialog(
                         context: context,
@@ -137,8 +135,12 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                               width: 90,
                               child: LoadingIndicator(
                                 indicatorType: Indicator.ballRotateChase,
-                                colors:  [Color(0xFFFFC700)],       /// Optional, The color collections
-                                strokeWidth: 2,                     /// Optional, The stroke of the line, only applicable to widget which contains line
+                                colors: [Color(0xFFFFC700)],
+
+                                /// Optional, The color collections
+                                strokeWidth: 2,
+
+                                /// Optional, The stroke of the line, only applicable to widget which contains line
                                 pathBackgroundColor: Colors.black,
                               ),
                             ),
@@ -149,9 +151,9 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                       fetchData().then((data) async {
                         Navigator.of(context).pop();
                         Map<String, dynamic> decodeToken =
-                        JwtDecoder.decode(data);
+                            JwtDecoder.decode(data);
                         SharedPreferences pref =
-                        await SharedPreferences.getInstance();
+                            await SharedPreferences.getInstance();
                         pref.setString("email", decodeToken['email']);
                         pref.setString("collage", decodeToken['collage']);
                         pref.setBool("isAdmin", false);
@@ -161,7 +163,7 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                         Navigator.of(context).pushAndRemoveUntil(
                           MaterialPageRoute(
                               builder: (context) => const StudentHomePage()),
-                              (route) => false,
+                          (route) => false,
                         );
                       }).catchError((error) {
                         _passwordController.clear();
@@ -171,7 +173,8 @@ class _StudentLoginPageState extends State<StudentLoginPage> {
                           context: context,
                           builder: (context) => const AlertBox(
                             title: 'User Not Found',
-                            content: 'Please check your credentials once again. ',
+                            content:
+                                'Please check your credentials once again. ',
                           ),
                         );
                       });

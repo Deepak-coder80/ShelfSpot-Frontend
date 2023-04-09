@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shelfspot/screens/authenticationScreens/adminAuthentication/admin_signup_page.dart';
 
 class SignUpTButton extends StatelessWidget {
   final String text1;
