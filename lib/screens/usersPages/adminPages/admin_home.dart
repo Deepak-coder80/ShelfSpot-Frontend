@@ -4,6 +4,7 @@ import 'package:shelfspot/screens/usersPages/adminPages/admin_book_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_profile_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_qn_paper_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_request_page.dart';
+import 'package:shelfspot/searchScreens/qn_paper_search.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   final List _pages = const [
     AdminBookPage(),
     AdminRequestScreen(),
-    AdminQnPaperScreen(),
+    QnPaperSearchScreen(),
     AdminProfileScreen(),
   ];
 

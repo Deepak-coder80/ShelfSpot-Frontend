@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
@@ -22,8 +21,6 @@ class OtherAPIServices{
         .map((e) => e.toString())
         .toList();
       return collages;
-    }else{
-      log('not success');
     }
     return [];
   }
