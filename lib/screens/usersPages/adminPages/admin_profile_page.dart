@@ -5,14 +5,14 @@ import 'package:shelfspot/components/buttonComponents/login_button.dart';
 import 'package:shelfspot/components/otherComponents/profile_details_display_component.dart';
 import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
 
-class StudentProfileScreen extends StatefulWidget {
-  const StudentProfileScreen({Key? key}) : super(key: key);
+class AdminProfileScreen extends StatefulWidget {
+  const AdminProfileScreen({Key? key}) : super(key: key);
 
   @override
-  State<StudentProfileScreen> createState() => _StudentProfileScreenState();
+  State<AdminProfileScreen> createState() => _AdminProfileScreenState();
 }
 
-class _StudentProfileScreenState extends State<StudentProfileScreen> {
+class _AdminProfileScreenState extends State<AdminProfileScreen> {
   String email='';
   String collage='';
 
@@ -68,7 +68,7 @@ class _StudentProfileScreenState extends State<StudentProfileScreen> {
                 text: 'Log Out',
                 onPressed: () async {
                   SharedPreferences pref =
-                      await SharedPreferences.getInstance();
+                  await SharedPreferences.getInstance();
 
                   pref.remove("email");
                   pref.remove("collage");

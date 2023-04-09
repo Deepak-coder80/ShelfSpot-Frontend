@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:shelfspot/screens/authenticationScreens/login_page.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_book_page.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_profile_page.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_qn_paper_page.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_request_page.dart';
 
 class AdminHomePage extends StatefulWidget {
   const AdminHomePage({Key? key}) : super(key: key);
@@ -13,7 +15,17 @@ class AdminHomePage extends StatefulWidget {
 class _AdminHomePageState extends State<AdminHomePage> {
   int _currentIndex = 0;
 
+  final List _pages = const [
+    AdminBookPage(),
+    AdminRequestScreen(),
+    AdminQnPaperScreen(),
+    AdminProfileScreen(),
+  ];
+
   void onTapBNB(index) {
+    if(index >= _pages.length){
+      return;
+    }
     setState(() {
       _currentIndex = index;
     });
@@ -28,21 +40,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
         elevation: 0,
         title: const Text('Shelf Spot Admin'),
       ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () async {
-            SharedPreferences pref = await SharedPreferences.getInstance();
-
-            pref.remove("email");
-            pref.remove("collage");
-            pref.remove("isAdmin");
-            // ignore: use_build_context_synchronously
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => const LogInPage()));
-          },
-          child: const Text('Log out'),
-        ),
-      ),
+      body:_pages[_currentIndex],
       bottomNavigationBar: buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -62,8 +60,8 @@ class _AdminHomePageState extends State<AdminHomePage> {
       backgroundColor: Colors.white12,
       items: const [
         BottomNavigationBarItem(
-          icon: Icon(FontAwesomeIcons.house),
-          label: 'home',
+          icon: Icon(FontAwesomeIcons.bookAtlas),
+          label: 'books',
           backgroundColor: Colors.white12,
         ),
         BottomNavigationBarItem(
