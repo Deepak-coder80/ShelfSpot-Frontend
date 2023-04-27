@@ -1,10 +1,10 @@
 import 'dart:developer';
 import 'package:http/http.dart' as http;
+import 'package:open_file_plus/open_file_plus.dart';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:shelfspot/apiServices/qn_paper_services.dart';
@@ -203,6 +203,9 @@ class _QnPaperSearchScreenState extends State<QnPaperSearchScreen> {
                 onPressed: () async {
                   log("pressed ${result.link}");
                   final shareLink = result.link;
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Opening the file please wait'),backgroundColor: Colors.green,)
+                  );
                   // Download the PDF file to the device's temporary directory
                   final match = RegExp(r'[-\w]{25,}').firstMatch(shareLink);
                   final fileId = match?.group(0);
@@ -214,16 +217,18 @@ class _QnPaperSearchScreenState extends State<QnPaperSearchScreen> {
                   final file = File('${tempDir.path}/${result.name}.pdf');
                   await file.writeAsBytes(bytes);
 
-                  // Display the PDF file using the PDFView widget
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => PDFView(
-                        filePath: file.path,
-                        fitPolicy: FitPolicy.WIDTH,
+                  await OpenFile.open(file.path);
 
-                      ),
-                    ),
-                  );
+                  // Display the PDF file using the PDFView widget
+                  // Navigator.of(context).push(
+                  //   MaterialPageRoute(
+                  //     builder: (context) => PDFView(
+                  //       filePath: file.path,
+                  //       fitPolicy: FitPolicy.WIDTH,
+                  //
+                  //     ),
+                  //   ),
+                  // );
 
                   // if (await canLaunchUrl(Uri.parse(result.link))) {
                   //   await launchUrl(Uri.parse(result.link));

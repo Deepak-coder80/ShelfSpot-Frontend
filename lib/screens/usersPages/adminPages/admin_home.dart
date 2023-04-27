@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_book_page.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_profile_page.dart';
+import 'package:shelfspot/screens/usersPages/adminPages/admin_qp_add_screen.dart';
 import 'package:shelfspot/screens/usersPages/adminPages/admin_request_page.dart';
 import 'package:shelfspot/searchScreens/qn_paper_search.dart';
 
@@ -23,7 +24,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
   ];
 
   void onTapBNB(index) {
-    if(index >= _pages.length){
+    if (index >= _pages.length) {
       return;
     }
     setState(() {
@@ -40,10 +41,64 @@ class _AdminHomePageState extends State<AdminHomePage> {
         elevation: 0,
         title: const Text('Shelf Spot Admin'),
       ),
-      body:_pages[_currentIndex],
+      body: _pages[_currentIndex],
       bottomNavigationBar: buildBottomNavigationBar(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  backgroundColor: const Color(0xFF201F15),
+                  title: const Text(
+                    'Please Select one action to continue',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {},
+                      child: const Text(
+                        'Add Books',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFC700),
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>const QPAddScreen()),);
+                      },
+                      child: const Text(
+                        'Add Question Papers',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFC700),
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Text(
+                        'Cancel',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFFFFC700),
+                          fontSize: 17,
+                        ),
+                      ),
+                    ),
+                  ],
+                );
+              });
+        },
         elevation: 5,
         backgroundColor: const Color(0xFFFFC700),
         child: const Icon(
