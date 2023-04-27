@@ -96,4 +96,52 @@ class QnPaperAPIServices {
 
     return null;
   }
+
+  static Future<bool> addQuestionPaper(QuestionPaperAddRequestModel qn) async{
+    try{
+      String url = '$baseurl/add_qn_paper/';
+
+      var body = jsonEncode(
+        {
+          "qnSubName": qn.qnSubName,
+          "qnMonth": qn.qnMonth,
+          "qnScheme": qn.qnScheme,
+          "qnSemester": qn.qnSemester,
+          "qnYear": qn.qnYear,
+          "qnLink": qn.qnLink,
+          "collage": qn.collage
+        }
+      );
+
+      var response = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Content-type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: body,
+      );
+
+      if (response.statusCode == 307) {
+        // Follow the redirect to the new URL
+        var redirectUrl = response.headers['location'];
+        response = await http.post(
+          Uri.parse(redirectUrl!),
+          headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json',
+          },
+          body: body,
+        );
+      }
+
+      if(response.statusCode == 200){
+        return true;
+      }
+
+      return false;
+    }catch(e){
+      return false;
+    }
+  }
 }

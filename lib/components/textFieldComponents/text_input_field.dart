@@ -16,6 +16,7 @@ class TextInputField extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: TextField(
+
         cursorColor: const Color(0xFFFFC700),
         decoration: InputDecoration(
           prefixIcon: Icon(
